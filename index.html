@@ -76,6 +76,11 @@
       animation: fadeIn 0.6s ease forwards;
     }
 
+    .correct {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
     .wrong {
       font-size: 18px;
       opacity: 0.9;
@@ -103,7 +108,6 @@
       }
     }
 
-    /* desktop enhancement */
     @media (min-width: 768px) {
       h1 {
         font-size: 28px;
@@ -131,16 +135,28 @@
 
     <button onclick="checkAnswer()">Submit</button>
 
-    <div class="result" id="result">
-      <div class="wrong">❌ Wrong.</div>
-      <div class="you">It’s you.</div>
-      <div class="small">nice try though 😉</div>
-    </div>
+    <div class="result" id="result"></div>
   </div>
 
   <script>
     function checkAnswer() {
-      document.getElementById("result").style.display = "block";
+      const input = document.getElementById("guess").value.trim().toLowerCase();
+      const result = document.getElementById("result");
+
+      if (input === "you" || input === "me") {
+        result.innerHTML = `
+          <div class="correct">✅ Correct.</div>
+          <div class="small">you’re pretty good at this 😉</div>
+        `;
+      } else {
+        result.innerHTML = `
+          <div class="wrong">❌ Wrong.</div>
+          <div class="you">It’s you.</div>
+          <div class="small">nice try though 😉</div>
+        `;
+      }
+
+      result.style.display = "block";
     }
   </script>
 
